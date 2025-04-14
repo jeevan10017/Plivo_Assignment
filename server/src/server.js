@@ -7,7 +7,7 @@ import app from './app.js';
 const startServer = async () => {
   try {
     await connectDB();
-    await initEmailTransporter();
+    // await initEmailTransporter();
     
     // Only start server in development
     if (process.env.NODE_ENV !== 'production') {
