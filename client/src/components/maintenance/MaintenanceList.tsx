@@ -81,63 +81,33 @@ export const MaintenanceList: React.FC<MaintenanceListProps> = ({
     );
   }
 
-  return (
-    <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-      <table className="min-w-full divide-y divide-gray-300">
-        <thead className="bg-gray-50">
-          <tr>
-            <th
-              scope="col"
-              className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+  // Mobile/tablet card view
+  const renderMobileView = () => (
+    <div className="space-y-4 p-4">
+      {maintenances.map((maintenance) => (
+        <div key={maintenance.id} className="bg-white rounded-lg shadow border border-gray-200 p-4">
+          <div className="flex justify-between items-start mb-3">
+            <Link
+              to={`/maintenance/${maintenance.id}`}
+              className="text-sm font-medium text-gray-900 hover:text-indigo-600"
             >
-              Title
-            </th>
-            <th
-              scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              {maintenance.title}
+            </Link>
+            <span
+              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(
+                maintenance.status
+              )}`}
             >
-              Status
-            </th>
-            <th
-              scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-            >
-              Scheduled Start
-            </th>
-            <th
-              scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-            >
-              Scheduled End
-            </th>
-            <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-              <span className="sr-only">Actions</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-gray-200 bg-white">
-          {maintenances.map((maintenance) => (
-            <tr key={maintenance.id}>
-              <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                <Link
-                  to={`/maintenance/${maintenance.id}`}
-                  className="hover:text-indigo-600"
-                >
-                  {maintenance.title}
-                </Link>
-              </td>
-              <td className="whitespace-nowrap px-3 py-4 text-sm">
-                <span
-                  className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(
-                    maintenance.status
-                  )}`}
-                >
-                  {maintenance.status
-                    ? maintenance.status.replace("_", " ")
-                    : "Unknown"}
-                </span>
-              </td>
-              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+              {maintenance.status
+                ? maintenance.status.replace("_", " ")
+                : "Unknown"}
+            </span>
+          </div>
+          
+          <div className="grid grid-cols-1 gap-2 my-2">
+            <div>
+              <p className="text-xs font-medium text-gray-500">Scheduled Start</p>
+              <p className="text-sm text-gray-700 mt-1">
                 {maintenance.scheduledStart &&
                 !isNaN(new Date(maintenance.scheduledStart).getTime())
                   ? format(
@@ -145,8 +115,12 @@ export const MaintenanceList: React.FC<MaintenanceListProps> = ({
                       "MMM d, yyyy HH:mm"
                     )
                   : "N/A"}
-              </td>
-              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+              </p>
+            </div>
+            
+            <div>
+              <p className="text-xs font-medium text-gray-500">Scheduled End</p>
+              <p className="text-sm text-gray-700 mt-1">
                 {maintenance.scheduledEnd &&
                 !isNaN(new Date(maintenance.scheduledEnd).getTime())
                   ? format(
@@ -154,34 +128,149 @@ export const MaintenanceList: React.FC<MaintenanceListProps> = ({
                       "MMM d, yyyy HH:mm"
                     )
                   : "N/A"}
-              </td>
+              </p>
+            </div>
+          </div>
+          
+          <div className="mt-3 pt-3 border-t border-gray-100 flex justify-end space-x-3">
+            {onEdit && (
+              <button
+                type="button"
+                onClick={() => onEdit(maintenance)}
+                className="text-indigo-600 hover:text-indigo-900 text-sm"
+              >
+                Edit
+              </button>
+            )}
+            {onDelete && (
+              <button
+                type="button"
+                onClick={() => onDelete(maintenance.id)}
+                className="text-red-600 hover:text-red-900 text-sm"
+              >
+                Delete
+              </button>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 
-              <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                <div className="flex justify-end space-x-2">
-                  {onEdit && (
-                    <button
-                      type="button"
-                      onClick={() => onEdit(maintenance)}
-                      className="text-indigo-600 hover:text-indigo-900"
-                    >
-                      Edit
-                    </button>
-                  )}
-                  {onDelete && (
-                    <button
-                      type="button"
-                      onClick={() => onDelete(maintenance.id)}
-                      className="text-red-600 hover:text-red-900"
-                    >
-                      Delete
-                    </button>
-                  )}
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+  // Desktop table view
+  const renderDesktopView = () => (
+    <table className="min-w-full divide-y divide-gray-300">
+      <thead className="bg-gray-50">
+        <tr>
+          <th
+            scope="col"
+            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+          >
+            Title
+          </th>
+          <th
+            scope="col"
+            className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+          >
+            Status
+          </th>
+          <th
+            scope="col"
+            className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+          >
+            Scheduled Start
+          </th>
+          <th
+            scope="col"
+            className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+          >
+            Scheduled End
+          </th>
+          <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
+            <span className="sr-only">Actions</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-gray-200 bg-white">
+        {maintenances.map((maintenance) => (
+          <tr key={maintenance.id}>
+            <td className="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+              <Link
+                to={`/maintenance/${maintenance.id}`}
+                className="hover:text-indigo-600"
+              >
+                {maintenance.title}
+              </Link>
+            </td>
+            <td className="px-3 py-4 text-sm">
+              <span
+                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(
+                  maintenance.status
+                )}`}
+              >
+                {maintenance.status
+                  ? maintenance.status.replace("_", " ")
+                  : "Unknown"}
+              </span>
+            </td>
+            <td className="px-3 py-4 text-sm text-gray-500">
+              {maintenance.scheduledStart &&
+              !isNaN(new Date(maintenance.scheduledStart).getTime())
+                ? format(
+                    new Date(maintenance.scheduledStart),
+                    "MMM d, yyyy HH:mm"
+                  )
+                : "N/A"}
+            </td>
+            <td className="px-3 py-4 text-sm text-gray-500">
+              {maintenance.scheduledEnd &&
+              !isNaN(new Date(maintenance.scheduledEnd).getTime())
+                ? format(
+                    new Date(maintenance.scheduledEnd),
+                    "MMM d, yyyy HH:mm"
+                  )
+                : "N/A"}
+            </td>
+
+            <td className="relative py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+              <div className="flex justify-end space-x-2">
+                {onEdit && (
+                  <button
+                    type="button"
+                    onClick={() => onEdit(maintenance)}
+                    className="text-indigo-600 hover:text-indigo-900"
+                  >
+                    Edit
+                  </button>
+                )}
+                {onDelete && (
+                  <button
+                    type="button"
+                    onClick={() => onDelete(maintenance.id)}
+                    className="text-red-600 hover:text-red-900"
+                  >
+                    Delete
+                  </button>
+                )}
+              </div>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+
+  return (
+    <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+      {/* Mobile view (hidden on lg screens) */}
+      <div className="lg:hidden">
+        {renderMobileView()}
+      </div>
+      
+      {/* Desktop view (hidden on smaller screens) */}
+      <div className="hidden lg:block overflow-x-auto">
+        {renderDesktopView()}
+      </div>
     </div>
   );
 };
