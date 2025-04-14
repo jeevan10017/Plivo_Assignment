@@ -33,7 +33,7 @@ export const initializeSocket = (token?: string) => {
     socket.disconnect();
   }
   
-  const socketUrl =  'http://localhost:3001';
+  const socketUrl = process.env.REACT_APP_SOCKET_URL || 'http://localhost:3000';
   
   socket = io(socketUrl, {
     auth: token ? { token } : undefined,
