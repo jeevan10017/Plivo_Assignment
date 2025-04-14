@@ -2,20 +2,20 @@
   "name": "status-page-api",
   "version": "1.0.0",
   "description": "Backend API for the status page application",
-  "main": "dist/server.js",
+  "main": "src/server.js", 
   "type": "module",
- "scripts": {
-  "start": "node src/server.js",  
-  "dev": "nodemon --watch src --exec node src/server.js",
-  "build": "npm run db:generate && npm run db:migrate",
-  "lint": "eslint src/**/*.js",
-  "format": "prettier --write \"src/**/*.js\"",
-  "test": "jest",
-  "db:generate": "prisma generate",
-  "db:migrate": "prisma migrate deploy",
-  "db:seed": "node prisma/seed.js"
-}
-,
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon --watch src --exec node src/server.js",
+    "build": "npm run db:generate && npm run db:migrate",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write \"src/**/*.js\"",
+    "test": "jest",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy",
+    "db:seed": "node prisma/seed.js"
+  },
+
   "keywords": [
     "status-page",
     "api",
