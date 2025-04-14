@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 
-const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const BASE_URL = process.env.REACT_APP_API_URL || 'https://plivo-assignment-5.onrender.com/api';
 
 
 const apiClient = axios.create({

@@ -13,7 +13,7 @@ const server = http.createServer(app);
 // Set up Socket.IO with CORS
 export const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || '*',
+    origin: [process.env.FRONTEND_URL, 'https://plivo-assignment-vxxc.vercel.app'],
     methods: ['GET', 'POST'],
   },
 });

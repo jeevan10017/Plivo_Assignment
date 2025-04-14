@@ -33,7 +33,7 @@ export const initializeSocket = (token?: string) => {
     socket.disconnect();
   }
   
-  const socketUrl = process.env.REACT_APP_SOCKET_URL || 'http://localhost:3000';
+  const socketUrl = process.env.REACT_APP_SOCKET_URL || 'https://plivo-assignment-vxxc.vercel.app';
   
   socket = io(socketUrl, {
     auth: token ? { token } : undefined,

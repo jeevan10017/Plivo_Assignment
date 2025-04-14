@@ -25,8 +25,11 @@ const app = express();
 
 app.use(helmet());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*',
+  origin: [process.env.FRONTEND_URL, 'https://plivo-assignment-vxxc.vercel.app'],
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Content-Length', 'X-Powered-By']
 }));
 app.use('/api/public', publicRoutes);
 app.use(compression());
@@ -47,7 +50,7 @@ app.get('/health', (_, res) => {
   res.status(200).json({ status: 'ok' });
 });
 app.use((req, res, next) => {
-  res.set('Cache-Control', 'no-store, max-age=0');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   next();
 });
 // Routes
