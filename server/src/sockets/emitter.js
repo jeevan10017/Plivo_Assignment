@@ -1,4 +1,4 @@
-import { io } from '../server.js';
+import { io } from 'socket.io';
 import logger from '../utils/logger.js';
 
 export const emitIncidentEvent = (event, data, additionalData) => {

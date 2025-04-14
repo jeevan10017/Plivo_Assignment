@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: status-page-api
+    env: node
+    rootDir: .
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        value: <your_database_url>
+      - key: CLERK_SECRET_KEY
+        value: <your_clerk_secret_key>
+      - key: CLERK_PUBLISHABLE_KEY
+        value: <your_clerk_publishable_key>
+      - key: FRONTEND_URL
+        value: <your_frontend_url>
