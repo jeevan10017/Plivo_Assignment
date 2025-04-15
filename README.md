@@ -3,6 +3,8 @@
 ## Overview
 A multi-tenant status page system enabling organizations to monitor services and communicate system status. Built with modern web technologies.
 
+Check out the demo video on Loom: [Watch Video](https://www.loom.com/share/4294cfe130d24b80a0f57850e3e78404?sid=ff96948b-7d17-4509-8aac-606056213c63)
+
 ## Features
 **Core Implementation:**
 -  Clerk-powered authentication & team management
