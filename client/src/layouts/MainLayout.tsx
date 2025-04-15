@@ -24,10 +24,14 @@ const MainContent: React.FC = () => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
   
+  const marginLeft = isSmallScreen 
+    ? 'ml-12' 
+    : (isExpanded ? 'ml-64' : 'ml-16');
+
   return (
-    <div className={`flex flex-col flex-1 ${isSmallScreen ? 'ml-16' : (isExpanded ? 'ml-64' : 'ml-16')} transition-all duration-300 ease-in-out`}>
+    <div className={`flex flex-col flex-1 ${marginLeft} transition-all duration-300 ease-in-out`}>
       <Header />
-      <main className="flex-1 px-2 sm:px-4 py-6 md:py-8 md:px-6 lg:px-8 overflow-hidden">
+      <main className="flex-1 relative px-2 sm:px-4 py-6 md:py-8 md:px-6 lg:px-8 overflow-y-auto">
         <Outlet />
       </main>
       <Footer />
@@ -37,7 +41,7 @@ const MainContent: React.FC = () => {
 
 export const MainLayout: React.FC = () => {
   const { user, isLoading } = useAuth();
-  
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -45,10 +49,10 @@ export const MainLayout: React.FC = () => {
       </div>
     );
   }
-  
+
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen bg-gray-50">
+      <div className="flex min-h-screen bg-gray-50 overflow-hidden">
         {user && <Sidebar />}
         <MainContent />
       </div>

@@ -85,9 +85,9 @@ export const Sidebar: React.FC = () => {
 
   return (
     <div 
-      className={`flex flex-col fixed inset-y-0 left-0 z-30 transition-all duration-300 ease-in-out ${sidebarWidth}`}
+      className={`flex flex-col fixed inset-y-0 left-0 z-30 transition-all duration-300 ease-in-out bg-gray-800 h-full ${sidebarWidth}`}
     >
-      <div className="flex-1 flex flex-col min-h-0 bg-gray-800">
+      <div className="flex-1 flex flex-col min-h-0">
         <div className="flex items-center justify-between p-4">
           {isExpanded && !isSmallScreen && (
             <span className="text-lg font-bold text-white">Admin Panel</span>
