@@ -54,7 +54,8 @@ export const  getUpcomingMaintenances = async (req, res, next) => {
           in: [MaintenanceStatus.SCHEDULED, MaintenanceStatus.IN_PROGRESS],
         },
         scheduledStart: {
-          gte: new Date(Date.now() - 24 * 60 * 60 * 1000),
+          // gte: new Date(Date.now() - 24 * 60 * 60 * 1000),
+          gte: new Date(),
         },
       },
       include: {

@@ -83,7 +83,7 @@ export const MaintenanceList: React.FC<MaintenanceListProps> = ({
 
   // Mobile/tablet card view
   const renderMobileView = () => (
-    <div className="space-y-4 p-4">
+    <div className="space-y-4 p-4 overflow-x-auto">
       {maintenances.map((maintenance) => (
         <div key={maintenance.id} className="bg-white rounded-lg shadow border border-gray-200 p-4">
           <div className="flex justify-between items-start mb-3">
@@ -263,7 +263,7 @@ export const MaintenanceList: React.FC<MaintenanceListProps> = ({
   return (
     <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
       {/* Mobile view (hidden on lg screens) */}
-      <div className="lg:hidden">
+      <div className="lg:hidden overflow-x-auto">
         {renderMobileView()}
       </div>
       

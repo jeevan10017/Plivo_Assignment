@@ -15,8 +15,8 @@ const SERVICE_STATUS = {
   [ServiceStatus.UNKNOWN]: 'Unknown',
 } as const;
 const statusOptions = Object.entries(SERVICE_STATUS).map(([value, label]) => ({
-   value ,
-  label,
+  value: value as ServiceStatus, 
+  label: SERVICE_STATUS[value as ServiceStatus]
 }));
 interface ServiceFormProps {
   service?: Service;

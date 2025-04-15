@@ -9,7 +9,10 @@ export const maintenanceApi = {
   
   getUpcoming: async (): Promise<Maintenance[]> => {
     const response = await apiClient.get('/maintenance/upcoming');
-    return response.data.maintenances; 
+    return response.data.maintenances.map((m: any) => ({
+      ...m,
+      serviceIds: m.services.map((s: any) => s.service.id),
+    })); 
   },
   
   getById: async (id: string): Promise<Maintenance> => {

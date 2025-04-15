@@ -87,7 +87,7 @@ export const IncidentList = ({
 
   // Mobile/tablet card view
   const renderMobileView = () => (
-    <div className="space-y-4">
+    <div className="space-y-4 overflow-x-auto px-1">
       {incidentArray.map((incident) => (
         <div key={incident.id} className="bg-white rounded-lg shadow border border-gray-200 p-4">
           <div className="flex justify-between items-start mb-3">
@@ -270,12 +270,12 @@ export const IncidentList = ({
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       {/* Mobile view (hidden on lg screens) */}
-      <div className="lg:hidden">
+      <div className="lg:hidden overflow-x-auto">
         {renderMobileView()}
       </div>
       
       {/* Desktop view (hidden on smaller screens) */}
-      <div className="hidden lg:block">
+      <div className="hidden lg:block overflow-x-auto">
         {renderDesktopView()}
       </div>
     </div>

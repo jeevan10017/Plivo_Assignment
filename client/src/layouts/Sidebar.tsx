@@ -78,9 +78,9 @@ export const Sidebar: React.FC = () => {
     { name: 'Settings', href: '/settings', icon: 'cog' },
   ];
 
-  // Determine sidebar width based on screen size and expanded state
+  // Make sidebar even thinner on small screens
   const sidebarWidth = isSmallScreen 
-    ? 'w-16' 
+    ? 'w-12' // Reduced from w-16 to w-12 for smaller screens
     : (isExpanded ? 'w-64' : 'w-16');
 
   return (
@@ -141,7 +141,10 @@ export const Sidebar: React.FC = () => {
                 }
               >
                 <svg
-                  className={`text-gray-400 group-hover:text-gray-300 flex-shrink-0 h-6 w-6 ${
+                  className={`text-gray-400 group-hover:text-gray-300 flex-shrink-0 ${
+                    // Smaller icon size for small screens
+                    isSmallScreen ? 'h-4 w-4' : 'h-6 w-6'
+                  } ${
                     isExpanded && !isSmallScreen ? 'mr-3' : 'mr-0'
                   }`}
                   xmlns="http://www.w3.org/2000/svg"

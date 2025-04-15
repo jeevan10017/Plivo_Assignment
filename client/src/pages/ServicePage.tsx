@@ -54,7 +54,7 @@ export default function ServicesPage() {
   const servicesArray = Array.isArray(services) ? services : [];
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto  sm:px-4 max-w-full px-4 py-6">
       <div className="flex justify-between items-center mb-6">
         <PageHeader 
           title="Services" 

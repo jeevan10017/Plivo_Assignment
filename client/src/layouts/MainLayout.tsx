@@ -27,7 +27,7 @@ const MainContent: React.FC = () => {
   return (
     <div className={`flex flex-col flex-1 ${isSmallScreen ? 'ml-16' : (isExpanded ? 'ml-64' : 'ml-16')} transition-all duration-300 ease-in-out`}>
       <Header />
-      <main className="flex-1 px-4 py-6 md:py-8 md:px-6 lg:px-8">
+      <main className="flex-1 px-2 sm:px-4 py-6 md:py-8 md:px-6 lg:px-8 overflow-hidden">
         <Outlet />
       </main>
       <Footer />

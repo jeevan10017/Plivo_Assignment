@@ -1,8 +1,9 @@
 export enum MaintenanceStatus {
-    SCHEDULED = 'scheduled',
-    IN_PROGRESS = 'in_progress',
-    COMPLETED = 'completed',
-  }
+  SCHEDULED = 'SCHEDULED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  COMPLETED = 'COMPLETED',
+  CANCELLED = 'CANCELLED',
+}
   
   export interface Maintenance {
     id: string;

@@ -67,7 +67,7 @@ export default function MaintenancePage() {
   const maintenancesArray = Array.isArray(maintenances) ? maintenances : [];
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-4 sm:px-4 py-6 max-w-full">
       <div className="flex justify-between items-center mb-6">
         <PageHeader 
           title="Maintenance" 
